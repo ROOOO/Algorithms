@@ -1,7 +1,8 @@
 #include "Manager.hpp"
 #include <iostream>
 
-Mgr::Mgr() {
+Mgr::Mgr(std::vector<std::vector<int>> map) {
+  this->m_map = map;
 }
 bool Mgr::m_Exists(std::list<Point*>* points, int x, int y) const {
   for (auto pi = points->begin(); pi != points->end(); ++pi) {
@@ -68,7 +69,7 @@ Point * Mgr::FindPath(Point *start, Point *end) {
       }
     }
 
-    auto endPoint = this->m_Get(this->m_openList, end);
+    auto endPoint = this->m_Get(this->m_clostList, end);
     if (endPoint) {
       endPoint->SetParent(minFPoint);
       return endPoint;
@@ -94,7 +95,7 @@ void Mgr::NotFoundInOpenList(Point* center, Point *end, Point* point) {
 }
 
 bool Mgr::CanReach(int x, int y) {
-  if (MAP[x][y] != 0 || this->m_Exists(this->m_clostList, x, y)) {
+  if (this->m_map[x][y] != 0 || this->m_Exists(this->m_clostList, x, y)) {
     return false;
   }
   return true;

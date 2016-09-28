@@ -6,32 +6,9 @@
 #include "Point.hpp"
 #include <vector>
 
-#define test 2
 class Point;
 const int STEP = 10;
 const int OBLIQUE = 14;
-#if test == 1
-const int MAP[8][12] = {
-  { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-  { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-  { 1, 0, 0, 0, 1, 0, 0, 0, 1 },
-  { 1, 0, 0, 0, 1, 0, 0, 0, 1 },
-  { 1, 0, 0, 0, 1, 0, 0, 0, 1 },
-  { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-  { 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-};
-#elif test == 2
-const int MAP[8][12] = {
-  { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-  { 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1 },
-  { 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1 },
-  { 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1 },
-  { 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1 },
-  { 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-  { 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
-  { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-};
-#endif
 class Mgr {
   std::list<Point *>* m_openList = new std::list<Point *>();
   std::list<Point *>* m_clostList = new std::list<Point *>();
@@ -45,9 +22,10 @@ class Mgr {
   Point* GetMinFPoint();
   void FoundInOpenList(Point* center, Point* point);
   void NotFoundInOpenList(Point* center, Point *end, Point* point);
+  std::vector<std::vector<int>> m_map;
 
 public:
-  Mgr();
+  Mgr(std::vector<std::vector<int>> map);
   Point * FindPath(Point *start, Point *end);
   void PrintPath(Point *e);
 };
