@@ -2,7 +2,7 @@
 #include <iostream>
 
 #define test 1
-void main() {
+int main() {
 #if test == 1
   Point start(3, 2);
   Point end(3, 6);
